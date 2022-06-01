@@ -1,0 +1,16 @@
+Number of images: 500 | Threading: False | Multi processing: False | Skip second part: False
+Part 1 took 109.59 seconds
+Part 2 took 80.6 seconds
+
+Number of images: 500 | Threading: True | Multi processing: True | Skip second part: False
+Part 1 took 18.22 seconds
+Part 2 took 27.36 seconds
+
+
+Number of images: 2500 | Threading: False | Multi processing: False | Skip second part: False
+Part 1 took 548.57 seconds
+Part 2 took 385.26 seconds
+
+Number of images: 2500 | Threading: True | Multi processing: True | Skip second part: False
+Part 1 took 85.56 seconds
+Part 2 took 127.38 seconds
