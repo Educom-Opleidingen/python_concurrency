@@ -19,14 +19,10 @@ def process_images(nr_images: int, multi_processing_enabled: bool) -> list:
     image_nrs = range(1, nr_images + 1)
 
     if multi_processing_enabled:
-        print('yes')
-        results.append('yes')
         with concurrent.futures.ProcessPoolExecutor(10) as executor:
             for result in executor.map(process_image, image_nrs):
                 results.append(result)
     else:
-        print('no')
-        results.append('no')
         for nr in image_nrs:
             result = process_image(nr)
             results.append(result)
