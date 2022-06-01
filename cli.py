@@ -2,8 +2,10 @@ import concurrent.futures
 from datetime import datetime
 import os
 from PIL import Image, ImageFilter
+import random
 import requests
 import shutil
+import string
 import time
 
 
@@ -21,10 +23,6 @@ def download_image(nr: int) -> None:
 
 
 def download_images(nr_images: int, threading_enabled: bool):
-    if os.path.exists('images'):
-        shutil.rmtree('images')
-    os.makedirs('images')
-    os.chdir(f'{os.getcwd()}/images')
 
     image_nrs = range(1, nr_images + 1)
 
@@ -64,7 +62,7 @@ def process_images(nr_images: int, multi_processing_enabled: bool):
 if __name__ == '__main__':
 
     # CONFIGURATION
-    nr_images = 100
+    nr_images = 10
     threading_enabled = False
     multi_processing_enabled = False
     skip_second_part = False

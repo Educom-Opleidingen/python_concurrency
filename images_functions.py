@@ -1,10 +1,22 @@
 import concurrent.futures
 import os
+import random
 import requests
 import shutil
 from streamlit_functions import create_output_markdown
 import subprocess
+import string
 import sys
+
+
+def create_and_change_into_random_folder() -> str:
+    project_root = os.path.realpath(os.path.join(os.path.dirname(__file__)))
+    random_folder = f'{project_root}/{"".join(random.choice(string.ascii_letters) for i in range(10))}'
+    if os.path.exists(f'{random_folder}'):
+        shutil.rmtree(f'{random_folder}')
+    os.makedirs(f'{random_folder}')
+    os.chdir(f'{random_folder}')
+    return random_folder
 
 
 def download_image(nr: int) -> str:
@@ -13,7 +25,7 @@ def download_image(nr: int) -> str:
 
     response = requests.get(f'https://picsum.photos/{dimension_images[0]}/{dimension_images[1]}?random')
 
-    file = open(f'images/{file_name}', 'wb')
+    file = open(f'{file_name}', 'wb')
     file.write(response.content)
     file.close()
 
@@ -21,9 +33,6 @@ def download_image(nr: int) -> str:
 
 
 def download_images(nr_images: int, threading_enabled: bool) -> None:
-    if os.path.exists('images'):
-        shutil.rmtree('images')
-    os.makedirs('images')
 
     image_nrs = range(1, nr_images + 1)
 
@@ -42,3 +51,10 @@ def process_images(nr_images: int, multi_processing_enabled: bool) -> None:
                         capture_output=True)
     for result in pi.stdout.decode().splitlines():
         create_output_markdown(result)
+
+
+def delete_random_folder(random_folder: str) -> None:
+    project_root = os.path.realpath(os.path.join(os.path.dirname(__file__), '..'))
+    os.chdir(f'{project_root}')
+    if os.path.exists(f'{random_folder}'):
+        shutil.rmtree(f'{random_folder}')

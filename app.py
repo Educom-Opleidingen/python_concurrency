@@ -1,7 +1,7 @@
 from datetime import datetime
 import streamlit as st
 import time
-from images_functions import download_images, process_images
+from images_functions import create_and_change_into_random_folder, download_images, process_images, delete_random_folder
 from streamlit_functions import create_custom_css, create_output_markdown
 
 
@@ -11,6 +11,7 @@ from streamlit_functions import create_custom_css, create_output_markdown
 def run_processing(nr_images: int, threading_enabled: bool, multi_processing_enabled: bool, skip_second_part: bool) \
         -> None:
     with output.container():
+        random_folder = create_and_change_into_random_folder()
 
         create_output_markdown('Started <span style="font-weight: 800;">part 1</span> at '
                                f'{datetime.now():%d-%m-%Y %H:%M:%S}...</span>')
@@ -36,6 +37,8 @@ def run_processing(nr_images: int, threading_enabled: bool, multi_processing_ena
 
             create_output_markdown('Finished <span style="font-weight: 800;">part 2</span> at '
                                    f'{datetime.now():%d-%m-%Y %H:%M:%S}.</span>')
+
+        delete_random_folder(random_folder)
 
     with summary.container():
         create_output_markdown(f'Number of images: <span style="font-weight: 800;">{nr_images}</span> | '
