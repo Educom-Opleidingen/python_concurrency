@@ -14,3 +14,12 @@ Part 2 took 385.26 seconds
 Number of images: 2500 | Threading: True | Multi processing: True | Skip second part: False
 Part 1 took 85.56 seconds
 Part 2 took 127.38 seconds
+
+
+Number of images: 50 | Threading: False | Multi processing: False | Skip second part: False
+Part 1 took 10.97 seconds
+Part 2 took 7.72 seconds
+
+Number of images: 50 | Threading: True | Multi processing: True | Skip second part: False
+Part 1 took 1.77 seconds
+Part 2 took 3.5 seconds

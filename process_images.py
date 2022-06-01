@@ -1,4 +1,5 @@
 import concurrent.futures
+import os
 from PIL import Image, ImageFilter
 import sys
 
@@ -6,10 +7,10 @@ import sys
 def process_image(nr: int) -> str:
     dimension_images = '1280x1024'.split('x')
     file_name = f'image_{str(nr).zfill(3)}.jpg'
-    img = Image.open(f'images/{file_name}')
+    img = Image.open(f'{file_name}')
     img = img.filter(ImageFilter.GaussianBlur(15))
     img.thumbnail((int(dimension_images[0]), int(dimension_images[1])))
-    img.save(f'images/processed_{file_name}')
+    img.save(f'processed_{file_name}')
     return f'- Processed {file_name}'
 
 

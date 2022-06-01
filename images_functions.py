@@ -9,9 +9,12 @@ import string
 import sys
 
 
+def determine_project_root() -> str:
+    return os.path.realpath(os.path.join(os.path.dirname(__file__)))
+
+
 def create_and_change_into_random_folder() -> str:
-    project_root = os.path.realpath(os.path.join(os.path.dirname(__file__)))
-    random_folder = f'{project_root}/{"".join(random.choice(string.ascii_letters) for i in range(10))}'
+    random_folder = f'{determine_project_root()}/{"".join(random.choice(string.ascii_letters) for i in range(10))}'
     if os.path.exists(f'{random_folder}'):
         shutil.rmtree(f'{random_folder}')
     os.makedirs(f'{random_folder}')
@@ -47,14 +50,13 @@ def download_images(nr_images: int, threading_enabled: bool) -> None:
 
 
 def process_images(nr_images: int, multi_processing_enabled: bool) -> None:
-    pi = subprocess.run([f'{sys.executable}', 'process_images.py', f'{nr_images}', f'{int(multi_processing_enabled)}'],
-                        capture_output=True)
+    pi = subprocess.run([f'{sys.executable}', f'{determine_project_root()}/process_images.py', f'{nr_images}',
+                         f'{int(multi_processing_enabled)}'], capture_output=True)
     for result in pi.stdout.decode().splitlines():
         create_output_markdown(result)
 
 
 def delete_random_folder(random_folder: str) -> None:
-    project_root = os.path.realpath(os.path.join(os.path.dirname(__file__), '..'))
-    os.chdir(f'{project_root}')
+    os.chdir(f'{determine_project_root()}')
     if os.path.exists(f'{random_folder}'):
         shutil.rmtree(f'{random_folder}')
