@@ -1,4 +1,5 @@
 from datetime import datetime
+import os
 import requests
 import time
 
@@ -32,3 +33,5 @@ if __name__ == '__main__':
     print(f'Finished part 1 at {datetime.now():%d-%m-%Y %H:%M:%S}.')
 
     print(f'Part 1 took {round(t2 - t1, 2)} seconds')
+
+    [os.remove(file) for file in os.listdir(os.getcwd()) if file.endswith('.jpg')]
