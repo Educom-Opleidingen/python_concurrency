@@ -15,7 +15,7 @@ def download_image(nr: int) -> None:
     print(f'- Downloaded {file_name}')
 
 
-def download_images(nr_images: int):
+def download_images(nr_images: int) -> None:
     image_nrs = range(1, nr_images + 1)
     with concurrent.futures.ThreadPoolExecutor() as executor:
         executor.map(download_image, image_nrs)

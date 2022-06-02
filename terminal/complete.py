@@ -2,10 +2,7 @@ import concurrent.futures
 from datetime import datetime
 import os
 from PIL import Image, ImageFilter
-import random
 import requests
-import shutil
-import string
 import time
 
 
@@ -92,3 +89,6 @@ if __name__ == '__main__':
     print(f'Part 1 took {round(t2 - t1, 2)} seconds')
     if not skip_second_part:
         print(f'Part 2 took {round(t4 - t3, 2)} seconds')
+
+    [os.remove(file) for file in os.listdir(os.getcwd()) if file.endswith('.jpg')]
+

@@ -16,7 +16,7 @@ def download_image(nr: int) -> None:
     print(f'- Downloaded {file_name}')
 
 
-def download_images(nr_images: int):
+def download_images(nr_images: int) -> None:
     image_nrs = range(1, nr_images + 1)
     with concurrent.futures.ThreadPoolExecutor() as executor:
         executor.map(download_image, image_nrs)
@@ -26,18 +26,14 @@ def process_image(nr: int) -> None:
     dimension_images = '1280x1024'.split('x')
     file_name = f'image_{str(nr).zfill(3)}.jpg'
     img = Image.open(f'{file_name}')
-
     img = img.filter(ImageFilter.GaussianBlur(15))
-
     img.thumbnail((int(dimension_images[0]), int(dimension_images[1])))
     img.save(f'processed_{file_name}')
     print(f'- Processed {file_name}')
 
 
-def process_images(nr_images: int):
-
+def process_images(nr_images: int) -> None:
     image_nrs = range(1, nr_images + 1)
-
     with concurrent.futures.ProcessPoolExecutor(10) as executor:
         executor.map(process_image, image_nrs)
 
