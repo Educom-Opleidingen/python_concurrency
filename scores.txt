@@ -1,3 +1,4 @@
+
 Number of images: 500 | Threading: False | Multi processing: False | Skip second part: False
 Part 1 took 109.59 seconds
 Part 2 took 80.6 seconds
